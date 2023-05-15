@@ -34,15 +34,15 @@ public class Player {
 
     }
 
-    public void move(int dx) {
-        this.x += dx;
-        this.y -= velocity;
-        if (!isToucheTheGround()){
-            velocity --;
-        }else {
-            velocity = 0;
-        }
-    }
+//    public void move(int dx) {
+//        this.x += dx;
+//        this.y -= velocity;
+//        if (!isToucheTheGround()){
+//            velocity --;
+//        }else {
+//            velocity = 0;
+//        }
+//    }
     public void jump() {
         this.velocity = 32;
     }
