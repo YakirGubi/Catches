@@ -9,7 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Player player2;
     private Wall[] walls;
     private Coin coin1;
-    private final int speed = 2;
+    private final int speed = 5;
     private int DxPlayer1;
     private int DxPlayer2;
     private boolean P1Left;
@@ -22,7 +22,7 @@ public class GameScene extends JPanel implements KeyListener {
 
         this.setBackground(Color.GRAY);
 
-        walls = new Wall[]{new Wall(0, 550, 1000, 50)};
+        walls = new Wall[]{new Wall(0, 550, 1000, 50) , new Wall(300, 400, 100, 50)};
 
         this.player1 = new Player(100, 500, false);
         this.player2 = new Player(900, 500, true);
@@ -55,10 +55,10 @@ public class GameScene extends JPanel implements KeyListener {
                     DxPlayer2 = 0;
                 }
                 if(P1Jump){
-                    player1.jump();
+                    player1.jump(walls);
                 }
                 if(P2Jump){
-                    player2.jump();
+                    player2.jump(walls);
                 }
                 player1.move(DxPlayer1,walls);
                 player2.move(DxPlayer2,walls);
@@ -70,7 +70,9 @@ public class GameScene extends JPanel implements KeyListener {
 
         super.paintComponent(graphics);
 
-        this.walls[0].paint(graphics);
+        for(Wall wall : walls){
+            wall.paint(graphics);
+        }
         this.player1.paint(graphics);
         this.player2.paint(graphics);
         this.coin1.paint(graphics);

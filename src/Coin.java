@@ -4,7 +4,7 @@ import java.util.Random;
 public class Coin {
     private int x;
     private int y;
-    private int size = 7;
+    private int size = 15;
     private Color color = Color.YELLOW;
 
     public Coin(int x , int y){

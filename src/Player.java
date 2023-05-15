@@ -23,8 +23,8 @@ public class Player {
         this.x = x;
         this.y = y;
 
-        this.width = 10;
-        this.height = 15;
+        this.width = 20;
+        this.height = 30;
 
 
     }
@@ -38,25 +38,26 @@ public class Player {
 
     public void move(int dx, Wall[] walls) {
 
+        this.x += dx;
+        this.y -= velocity;
         if (!isToucheTheGround(walls)){
             this.velocity --;
         }else {
             this.velocity = 0;
         }
-
-        this.x += dx;
-        this.y -= velocity;
     }
-    public void jump() {
-        this.velocity = 5;
+    public void jump(Wall[] walls) {
+        if(isToucheTheGround(walls)){
+            this.velocity = 15;
+        }
     }
 
     public boolean isToucheTheGround(Wall[] walls) {
         for (Wall wall : walls) {
-            if(this.x >= wall.getX() && this.x < wall.getX() + wall.getWidth()){
-                if (this.y >= wall.getY() - wall.getHeight() && this.y < wall.getY() ){
+            if(this.x + this.width >= wall.getX() && this.x < wall.getX() + wall.getWidth()){
+                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() ){
 
-                    this.y = wall.getY()-height;
+                    this.y = wall.getY() - height;
                     return true;
 
                 }
