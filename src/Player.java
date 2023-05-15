@@ -14,6 +14,8 @@ public class Player {
 
     public Player(int x, int y, boolean isCatch) {
 
+        velocity = 0;
+
         if (isCatch){
             this.color = Color.RED;
         }else this.color = Color.BLUE;
@@ -35,29 +37,28 @@ public class Player {
     }
 
     public void move(int dx, Wall[] walls) {
+
+        if (!isToucheTheGround(walls)){
+            this.velocity --;
+        }else {
+            this.velocity = 0;
+        }
+
         this.x += dx;
         this.y -= velocity;
-        if (!isToucheTheGround(walls)){
-            velocity --;
-        }else {
-            velocity = 0;
-        }
     }
     public void jump() {
-        this.velocity = 32;
+        this.velocity = 5;
     }
 
     public boolean isToucheTheGround(Wall[] walls) {
-        if (this.y - this.height == 600) {
-            return true;
-        }
-        for (int i = 0; i < walls.length; i++) {
+        for (Wall wall : walls) {
+            if(this.x >= wall.getX() && this.x < wall.getX() + wall.getWidth()){
+                if (this.y >= wall.getY() - wall.getHeight() && this.y < wall.getY() ){
 
-            for (int j = 0; j < walls[i].getX(); j++) {
-                for (int k = 0; k < walls[i].getY(); k++) {
-                    if (this.y - this.height == walls[i].getY() && this.x == walls[i].getX()){
-                        return true;
-                    }
+                    this.y = wall.getY()-height;
+                    return true;
+
                 }
             }
         }

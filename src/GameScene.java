@@ -34,7 +34,7 @@ public class GameScene extends JPanel implements KeyListener {
     public void mainGameLoop(){
         new Thread(()->{
             while (true){
-                Utils.sleep(10);
+                Utils.sleep(100);
                 repaint();
                 if(P1Right){
                     DxPlayer1 = 1;
