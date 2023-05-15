@@ -19,12 +19,12 @@ public class Coin {
         do{
            x = random.nextInt();
            y = random.nextInt();
-        }while
+        }while(isCollision(player1,player2,walls));
     }
     public boolean isCollision(Player player1 , Player player2 , Wall[] walls){
         boolean flag = false;
         if(player1.getX() >= this.x+this.size && player1.getX()+player1.getWidth() <= this.x){
-            flag = true
+            flag = true;
         }
         return flag;
     }
