@@ -34,28 +34,28 @@ public class Player {
 
     }
 
-//    public void move(int dx) {
-//        this.x += dx;
-//        this.y -= velocity;
-//        if (!isToucheTheGround()){
-//            velocity --;
-//        }else {
-//            velocity = 0;
-//        }
-//    }
+    public void move(int dx, Wall[] walls) {
+        this.x += dx;
+        this.y -= velocity;
+        if (!isToucheTheGround(walls)){
+            velocity --;
+        }else {
+            velocity = 0;
+        }
+    }
     public void jump() {
         this.velocity = 32;
     }
 
-    public boolean isToucheTheGround(Wall[] wall) {
+    public boolean isToucheTheGround(Wall[] walls) {
         if (this.y - this.height == 600) {
             return true;
         }
-        for (int i = 0; i < wall.length; i++) {
+        for (int i = 0; i < walls.length; i++) {
 
-            for (int j = 0; j < wall[i].getX(); j++) {
-                for (int k = 0; k < wall[i].getY(); k++) {
-                    if (this.y - this.height == wall[i].getY() && this.x == wall[i].getX()){
+            for (int j = 0; j < walls[i].getX(); j++) {
+                for (int k = 0; k < walls[i].getY(); k++) {
+                    if (this.y - this.height == walls[i].getY() && this.x == walls[i].getX()){
                         return true;
                     }
                 }
