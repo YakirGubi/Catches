@@ -9,6 +9,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Player player2;
     private Wall[] walls;
     private Coin coin1;
+    private final int speed = 2;
     private int DxPlayer1;
     private int DxPlayer2;
     private boolean P1Left;
@@ -26,6 +27,9 @@ public class GameScene extends JPanel implements KeyListener {
         this.player1 = new Player(100, 500, false);
         this.player2 = new Player(900, 500, true);
         this.coin1 = new Coin(450,430);
+        this.setFocusable(true);
+        this.requestFocus();
+        this.addKeyListener(this);
 
         mainGameLoop();
 
@@ -34,19 +38,19 @@ public class GameScene extends JPanel implements KeyListener {
     public void mainGameLoop(){
         new Thread(()->{
             while (true){
-                Utils.sleep(100);
+                Utils.sleep(10);
                 repaint();
                 if(P1Right){
-                    DxPlayer1 = 1;
+                    DxPlayer1 = speed;
                 }else if(P1Left){
-                    DxPlayer1 = -1;
+                    DxPlayer1 = -speed;
                 }else {
                     DxPlayer1 = 0;
                 }
                 if(P2Right){
-                    DxPlayer2 = 1;
+                    DxPlayer2 = speed;
                 }else if(P2Left){
-                    DxPlayer2 = -1;
+                    DxPlayer2 = -speed;
                 }else {
                     DxPlayer2 = 0;
                 }
@@ -80,44 +84,44 @@ public class GameScene extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            P1Jump = true;
+            this.P1Jump = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            P1Left = true;
+            this.P1Left = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            P1Right = true;
+            this.P1Right = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_W){
-            P2Jump = true;
+            this.P2Jump = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_A){
-            P2Left = true;
+            this.P2Left = true;
         }
         if(e.getKeyCode() == KeyEvent.VK_D){
-            P2Right = true;
+            this.P2Right = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            P1Jump = false;
+            this.P1Jump = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            P1Left = false;
+            this.P1Left = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            P1Right = false;
+            this.P1Right = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_W){
-            P2Jump = false;
+            this.P2Jump = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_A){
-            P2Left = false;
+            this.P2Left = false;
         }
         if(e.getKeyCode() == KeyEvent.VK_D){
-            P2Right = false;
+            this.P2Right = false;
         }
     }
 }

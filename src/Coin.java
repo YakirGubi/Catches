@@ -20,11 +20,23 @@ public class Coin {
            x = random.nextInt();
            y = random.nextInt();
         }while(isCollision(player1,player2,walls));
+
+        this.x = x;
+        this.y = y;
     }
     public boolean isCollision(Player player1 , Player player2 , Wall[] walls){
         boolean flag = false;
-        if(player1.getX() >= this.x+this.size && player1.getX()+player1.getWidth() <= this.x){
+        if(player1.getX() >= this.x+this.size && player1.getX()+player1.getWidth() <= this.x && player1.getY() >= this.y+this.size && player1.getY()+player1.getHeight() <= this.x+this.size  ){
             flag = true;
+        }else if(player2.getX() >= this.x+this.size && player2.getX()+player2.getWidth() <= this.x && player2.getY() >= this.y+this.size && player2.getY()+player2.getHeight() <= this.x+this.size){
+            flag = true;
+        }else {
+            for (Wall wall : walls) {
+                if (wall.getX() >= this.x + this.size && wall.getX() + wall.getWidth() <= this.x && wall.getY() >= this.y + this.size && wall.getY() + wall.getHeight() <= this.x + this.size) {
+                    flag = true;
+                    break;
+                }
+            }
         }
         return flag;
     }
