@@ -53,6 +53,13 @@ public class Player {
         }
         for (int i = 0; i < wall.length; i++) {
 
+            for (int j = 0; j < wall[i].getX(); j++) {
+                for (int k = 0; k < wall[i].getY(); k++) {
+                    if (this.y - this.height == wall[i].getY() && this.x == wall[i].getX()){
+                        return true;
+                    }
+                }
+            }
         }
         return false;
     }
