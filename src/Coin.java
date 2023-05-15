@@ -11,19 +11,23 @@ public class Coin {
         this.x = x;
         this.y = y;
     }
-//    public static void replace(Player player1 , Player player2 , Wall[] walls){
-//        Random random = new Random();
-//        int x;
-//        int y;
-//
-//        do{
-//           x = random.nextInt();
-//           y = random.nextInt();
-//        }while
-//    }
-//    public static boolean isCollision(Player player1 , Player player2 , Wall[] walls){
-//        return false;
-//    }
+    public void replace(Player player1 , Player player2 , Wall[] walls){
+        Random random = new Random();
+        int x;
+        int y;
+
+        do{
+           x = random.nextInt();
+           y = random.nextInt();
+        }while(isCollision(player1,player2,walls));
+    }
+    public boolean isCollision(Player player1 , Player player2 , Wall[] walls){
+        boolean flag = false;
+        if(player1.getX() >= this.x+this.size && player1.getX()+player1.getWidth() <= this.x){
+            flag = true;
+        }
+        return flag;
+    }
 
     public void paint(Graphics graphics) {
 
@@ -48,19 +52,4 @@ public class Coin {
         return color;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public void setSize(int size) {
-        this.size = size;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }
