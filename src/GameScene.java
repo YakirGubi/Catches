@@ -18,6 +18,15 @@ public class GameScene extends JPanel {
 
 
     }
+    public void mainGameLoop(){
+        new Thread(()->{
+            while (true){
+                Utils.sleep(10);
+                repaint();
+
+            }
+        }).start();
+    }
 
     public void paintComponent(Graphics graphics){
 
