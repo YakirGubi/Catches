@@ -10,6 +10,7 @@ public class Player {
     private boolean isCanJump;
     private int velocity;
     private Color color;
+    private int speed = 5;
 
 
     public Player(int x, int y, boolean isCatch) {
@@ -26,7 +27,6 @@ public class Player {
         this.width = 20;
         this.height = 30;
 
-
     }
 
     public void paint(Graphics graphics) {
@@ -38,26 +38,46 @@ public class Player {
 
     public void move(int dx, Wall[] walls) {
 
-        this.x += dx;
-        this.y -= velocity;
-        if (!isToucheTheGround(walls)){
-            this.velocity --;
+        if (isTouchTheRightWall(walls)) {
+            if(dx >= 0){
+                this.x += dx;
+            }
+        }else if (isTouchTheLeftWall(walls)) {
+            if(dx <= 0){
+                this.x += dx;
+            }
+        }else{
+            this.x += dx;
+        }
+
+        if (!isTouchTheLeftWall(walls) && !isTouchTheRightWall(walls)){
+            this.y -= this.velocity;
+        }
+        if (!isToucheTheGround(walls)) {
+            this.velocity--;
+            isTouchTheCeiling(walls);
         }else {
             this.velocity = 0;
         }
     }
     public void jump(Wall[] walls) {
-        if(isToucheTheGround(walls)){
+        if(isToucheTheGround(walls)) {
             this.velocity = 15;
+        }else if(isTouchTheLeftWall(walls)) {
+            this.velocity = 15;
+            this.x -= this.speed;
+        }else if(isTouchTheRightWall(walls)){
+            this.velocity = 15;
+            this.x += this.speed;
         }
     }
 
     public boolean isToucheTheGround(Wall[] walls) {
         for (Wall wall : walls) {
-            if(this.x + this.width >= wall.getX() && this.x < wall.getX() + wall.getWidth()){
-                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() ){
+            if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
+                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() - 10){
 
-                    this.y = wall.getY() - height;
+                    this.y = wall.getY() - this.height;
                     return true;
 
                 }
@@ -66,7 +86,64 @@ public class Player {
         return false;
     }
 
-    public int getX() {
+    public void isTouchTheCeiling(Wall[] walls){
+
+        for (Wall wall : walls) {
+            if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
+                if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()){
+
+                    this.y = wall.getY() + wall.getHeight();
+                    this.velocity = -1;
+                    break;
+                }
+            }
+        }
+    }
+
+    private boolean isTouchTheLeftWall(Wall[] walls) {
+
+        for (Wall wall : walls) {
+            if (this.x + this.width >= wall.getX() && this.x + this.width <= wall.getX() + this.speed) {
+                if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()) {
+
+                    this.x = wall.getX() - this.width;
+                    this.velocity = 0;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    private boolean isTouchTheRightWall(Wall[] walls){
+
+        for (Wall wall : walls) {
+
+            if (this.x <= wall.getX() + wall.getWidth() && this.x >= wall.getX() + wall.getWidth() - this.speed){
+                if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()){
+
+                    this.x = wall.getX() + wall.getWidth();
+                    this.velocity = 0;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean isTouchTheCoin(Coin[] coins) {
+        if (this.isCatch){
+            for (Coin coin : coins) {
+                if (this.x + this.width >= coin.getX() && this.x < coin.getX() + coin.getSize()){
+                    if (this.y + this.height >= coin.getY() && this.y <= coin.getY() + coin.getSize()){
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+
+        public int getX() {
         return x;
     }
     public void setX(int x) {
