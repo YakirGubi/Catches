@@ -20,6 +20,37 @@ public class Wall {
         graphics.fillRect(this.x, this.y, this.width, this.height);
 
     }
+    public static Wall[] maps(int num){
+        Wall[] map;
+
+        if(num == 0){
+            map = new Wall[18];
+            map[4] = new Wall(100, 150, 100, 20);
+            map[5] = new Wall(300, 150, 100, 20);
+            map[6] = new Wall(600, 150, 100, 20);
+            map[7] = new Wall(800, 150, 100, 20);
+            map[8] = new Wall(100, 300, 100, 20);
+            map[9] = new Wall(300, 300, 100, 20);
+            map[10] = new Wall(600, 300, 100, 20);
+            map[11] = new Wall(800, 300, 100, 20);
+            map[12] = new Wall(100, 450, 100, 20);
+            map[13] = new Wall(300, 450, 100, 20);
+            map[14] = new Wall(600, 450, 100, 20);
+            map[15] = new Wall(800, 450, 100, 20);
+            map[16] = new Wall(490, 150, 20, 100);
+            map[17] = new Wall(490, 350, 20, 100);
+
+        }else{
+            map = new Wall[4];
+        }
+
+        map[0] = new Wall(0, 555, 1000, 10);
+        map[1] = new Wall(0, 0, 1000, 10);
+        map[2] = new Wall(0, 0, 10, 600);
+        map[3] = new Wall(977, 0, 10, 600);
+
+        return map;
+    }
 
     public int getX() {
         return x;

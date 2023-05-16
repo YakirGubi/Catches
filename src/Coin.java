@@ -11,34 +11,50 @@ public class Coin {
         this.x = x;
         this.y = y;
     }
-    public void replace(Player player1 , Player player2 , Wall[] walls){
+    public void replace(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
         Random random = new Random();
-        int x;
-        int y;
 
         do{
-           x = random.nextInt();
-           y = random.nextInt();
-        }while(isCollision(player1,player2,walls));
+           this.x = random.nextInt(977);
+           this.y = random.nextInt(550);
+           System.out.println(isCollision(player1,player2,walls,coins));
+        }while(isCollision(player1,player2,walls,coins));
 
-        this.x = x;
-        this.y = y;
     }
-    public boolean isCollision(Player player1 , Player player2 , Wall[] walls){
-        boolean flag = false;
-        if(player1.getX() >= this.x+this.size && player1.getX()+player1.getWidth() <= this.x && player1.getY() >= this.y+this.size && player1.getY()+player1.getHeight() <= this.x+this.size  ){
-            flag = true;
-        }else if(player2.getX() >= this.x+this.size && player2.getX()+player2.getWidth() <= this.x && player2.getY() >= this.y+this.size && player2.getY()+player2.getHeight() <= this.x+this.size){
-            flag = true;
-        }else {
-            for (Wall wall : walls) {
-                if (wall.getX() >= this.x + this.size && wall.getX() + wall.getWidth() <= this.x && wall.getY() >= this.y + this.size && wall.getY() + wall.getHeight() <= this.x + this.size) {
-                    flag = true;
-                    break;
+    public boolean isCollision(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
+        if (this.x + this.size >= player1.getX() && this.x <= player1.getX() + player1.getWidth()) {
+            if (this.y + this.size >= player1.getY() && this.y <= player1.getY() + player1.getHeight()) {
+
+                return true;
+            }
+        }
+        if (this.x + this.size >= player2.getX() && this.x <= player2.getX() + player2.getWidth()) {
+            if (this.y + this.size >= player2.getY() && this.y <= player2.getY() + player2.getHeight()) {
+
+                return true;
+            }
+        }
+        for (Wall wall : walls) {
+            if (this.x + this.size >= wall.getX() && this.x <= wall.getX() + wall.getWidth()) {
+                if (this.y + this.size >= wall.getY() && this.y <= wall.getY() + wall.getHeight()) {
+
+                    return true;
                 }
             }
         }
-        return flag;
+        int count = 0;
+        for (int i = 0 ; i < coins.length ; i++) {
+            if (this.x + this.size >= coins[i].getX() && this.x <= coins[i].getX() + coins[i].getSize()) {
+                if (this.y + this.size >= coins[i].getY() && this.y <= coins[i].getY() + coins[i].getSize()) {
+
+                    count++;
+                }
+            }
+        }
+        if(count < 1){
+            return true;
+        }
+        return false;
     }
 
     public void paint(Graphics graphics) {

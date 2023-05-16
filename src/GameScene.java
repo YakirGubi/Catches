@@ -8,7 +8,7 @@ public class GameScene extends JPanel implements KeyListener {
     private Player player1;
     private Player player2;
     private Wall[] walls;
-    private Coin coin1;
+    private Coin[] coins;
     private final int speed = 5;
     private int DxPlayer1;
     private int DxPlayer2;
@@ -18,18 +18,40 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean P2Left;
     private boolean P2Right;
     private boolean P2Jump;
+    private int score;
+    private int timer;
+    JLabel label;
     public GameScene(){
 
         this.setBackground(Color.GRAY);
 
-        walls = new Wall[]{new Wall(0, 550, 1000, 50) , new Wall(300, 400, 100, 50)};
+        walls = Wall.maps(0);
+
+
 
         this.player1 = new Player(100, 500, false);
         this.player2 = new Player(900, 500, true);
-        this.coin1 = new Coin(450,430);
+        this.coins = new Coin[3];
+        for(int i = 0 ; i < coins.length ; i++){
+            coins[i] = new Coin(0,0);
+        }
+
+        score = 0;
+        timer = 0;
+        label = new JLabel("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score);
+        label.setBounds(0,0,1000,50);
+        label.setBackground(Color.GRAY);
+        label.setVisible(true);
+        label.setFont(new Font(null,0,50));
+        this.add(label);
+
         this.setFocusable(true);
         this.requestFocus();
         this.addKeyListener(this);
+
+        for (Coin coin : coins){
+            coin.replace(player1,player2,walls,coins);
+        }
 
         mainGameLoop();
 
@@ -62,6 +84,11 @@ public class GameScene extends JPanel implements KeyListener {
                 }
                 player1.move(DxPlayer1,walls);
                 player2.move(DxPlayer2,walls);
+//                if(player1){
+//                    score++;
+//                }
+                timer += 1;
+                label.setText("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score);
             }
         }).start();
     }
@@ -75,7 +102,9 @@ public class GameScene extends JPanel implements KeyListener {
         }
         this.player1.paint(graphics);
         this.player2.paint(graphics);
-        this.coin1.paint(graphics);
+        for(Coin coin : coins){
+            coin.paint(graphics);
+        }
     }
 
     @Override
