@@ -142,7 +142,16 @@ public class Player {
         return -1;
     }
 
-
+    public boolean isTouchTheHunted(Player player){
+        if (this.isCatch) {
+            if (this.x + this.width >= player.getX() && this.x <= player.getX() + player.getWidth()){
+                if (this.y + this.height >= player.getY() && this.y <= player.getY() + player.getHeight()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
         public int getX() {
         return x;
     }
