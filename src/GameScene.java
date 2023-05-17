@@ -50,6 +50,12 @@ public class GameScene extends JPanel implements KeyListener {
             while (true){
                 Utils.sleep(10);
                 repaint();
+                if(P1Jump){
+                    player1.jump(walls);
+                }
+                if(P2Jump){
+                    player2.jump(walls);
+                }
                 if(P1Right){
                     player1.move(player1.getSpeed(),walls);
                 }else if(P1Left){
@@ -63,12 +69,6 @@ public class GameScene extends JPanel implements KeyListener {
                     player2.move(-player2.getSpeed(),walls);
                 }else {
                     player2.move(0,walls);
-                }
-                if(P1Jump){
-                    player1.jump(walls);
-                }
-                if(P2Jump){
-                    player2.jump(walls);
                 }
 
                 if(player1.isTouchTheCoin(coins) != -1){
