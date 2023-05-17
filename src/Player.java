@@ -130,11 +130,10 @@ public class Player {
         return false;
     }
     public int isTouchTheCoin(Coin[] coins) {
-        if (this.isCatch){
+        if (!this.isCatch){
             for (int i = 0; i < coins.length; i++) {
                 if (this.x + this.width >= coins[i].getX() && this.x < coins[i].getX() + coins[i].getSize()){
                     if (this.y + this.height >= coins[i].getY() && this.y <= coins[i].getY() + coins[i].getSize()){
-
                         return i;
                     }
                 }
