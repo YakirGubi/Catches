@@ -9,9 +9,6 @@ public class GameScene extends JPanel implements KeyListener {
     private Player player2;
     private Wall[] walls;
     private Coin[] coins;
-    private final int speed = 5;
-    private int DxPlayer1;
-    private int DxPlayer2;
     private boolean P1Left;
     private boolean P1Right;
     private boolean P1Jump;
@@ -20,14 +17,11 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean P2Jump;
     private int score;
     private int timer;
-    JLabel label;
     public GameScene(){
 
         this.setBackground(Color.GRAY);
 
         walls = Wall.maps(0);
-
-
 
         this.player1 = new Player(100, 500, false);
         this.player2 = new Player(900, 500, true);
@@ -38,12 +32,6 @@ public class GameScene extends JPanel implements KeyListener {
 
         score = 0;
         timer = 0;
-        label = new JLabel("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score);
-        label.setBounds(0,0,1000,50);
-        label.setBackground(Color.GRAY);
-        label.setVisible(true);
-        label.setFont(new Font(null,0,50));
-        this.add(label);
 
         this.setFocusable(true);
         this.requestFocus();
@@ -63,18 +51,18 @@ public class GameScene extends JPanel implements KeyListener {
                 Utils.sleep(10);
                 repaint();
                 if(P1Right){
-                    DxPlayer1 = speed;
+                    player1.move(player1.getSpeed(),walls);
                 }else if(P1Left){
-                    DxPlayer1 = -speed;
+                    player1.move(-player1.getSpeed(),walls);
                 }else {
-                    DxPlayer1 = 0;
+                    player1.move(0,walls);
                 }
                 if(P2Right){
-                    DxPlayer2 = speed;
+                    player2.move(player2.getSpeed(),walls);
                 }else if(P2Left){
-                    DxPlayer2 = -speed;
+                    player2.move(-player2.getSpeed(),walls);
                 }else {
-                    DxPlayer2 = 0;
+                    player2.move(0,walls);
                 }
                 if(P1Jump){
                     player1.jump(walls);
@@ -82,13 +70,16 @@ public class GameScene extends JPanel implements KeyListener {
                 if(P2Jump){
                     player2.jump(walls);
                 }
-                player1.move(DxPlayer1,walls);
-                player2.move(DxPlayer2,walls);
-//                if(player1){
-//                    score++;
-//                }
+
+                if(player1.isTouchTheCoin(coins) != -1){
+                    score++;
+                    coins[player1.isTouchTheCoin(coins)].replace(player1,player2,walls,coins);
+                }
                 timer += 1;
-                label.setText("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score);
+
+                if(timer == 6000 || player2.isTouchTheHunted(player1)){
+                    System.out.println("The game end:\nThe hunted get " + score + " points");
+                }
             }
         }).start();
     }
@@ -96,6 +87,9 @@ public class GameScene extends JPanel implements KeyListener {
     public void paintComponent(Graphics graphics){
 
         super.paintComponent(graphics);
+
+        graphics.setFont(new Font(null,0,50));
+        graphics.drawString("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score,260,60);
 
         for(Wall wall : walls){
             wall.paint(graphics);
@@ -115,44 +109,44 @@ public class GameScene extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            this.P1Jump = true;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            this.P1Left = true;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            this.P1Right = true;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_W){
             this.P2Jump = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){
+        if(e.getKeyCode() == KeyEvent.VK_LEFT){
             this.P2Left = true;
         }
-        if(e.getKeyCode() == KeyEvent.VK_D){
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             this.P2Right = true;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_W){
+            this.P1Jump = true;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            this.P1Left = true;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            this.P1Right = true;
         }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
         if(e.getKeyCode() == KeyEvent.VK_UP){
-            this.P1Jump = false;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_LEFT){
-            this.P1Left = false;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
-            this.P1Right = false;
-        }
-        if(e.getKeyCode() == KeyEvent.VK_W){
             this.P2Jump = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_A){
+        if(e.getKeyCode() == KeyEvent.VK_LEFT){
             this.P2Left = false;
         }
-        if(e.getKeyCode() == KeyEvent.VK_D){
+        if(e.getKeyCode() == KeyEvent.VK_RIGHT){
             this.P2Right = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_W){
+            this.P1Jump = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_A){
+            this.P1Left = false;
+        }
+        if(e.getKeyCode() == KeyEvent.VK_D){
+            this.P1Right = false;
         }
     }
 }
