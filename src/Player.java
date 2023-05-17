@@ -129,17 +129,18 @@ public class Player {
         }
         return false;
     }
-    public boolean isTouchTheCoin(Coin[] coins) {
+    public int isTouchTheCoin(Coin[] coins) {
         if (this.isCatch){
-            for (Coin coin : coins) {
-                if (this.x + this.width >= coin.getX() && this.x < coin.getX() + coin.getSize()){
-                    if (this.y + this.height >= coin.getY() && this.y <= coin.getY() + coin.getSize()){
-                        return true;
+            for (int i = 0; i < coins.length; i++) {
+                if (this.x + this.width >= coins[i].getX() && this.x < coins[i].getX() + coins[i].getSize()){
+                    if (this.y + this.height >= coins[i].getY() && this.y <= coins[i].getY() + coins[i].getSize()){
+
+                        return i;
                     }
                 }
             }
         }
-        return false;
+        return -1;
     }
 
 
@@ -190,5 +191,11 @@ public class Player {
     }
     public void setColor(Color color) {
         this.color = color;
+    }
+    public int getSpeed() {
+        return speed;
+    }
+    public void setSpeed(Color color) {
+        this.speed = speed;
     }
 }
