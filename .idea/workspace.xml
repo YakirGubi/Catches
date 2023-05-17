@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6f8a9819-fdd3-4ad4-b8ec-187d42e05ead" name="Changes" comment="not is catch">
+    <list default="true" id="6f8a9819-fdd3-4ad4-b8ec-187d42e05ead" name="Changes" comment="is catch metod">
       <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -118,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684322033074</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="is catch metod">
+      <created>1684322714626</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1684322714626</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -137,6 +144,7 @@
     <MESSAGE value="coin touch and wall" />
     <MESSAGE value="get and set to speed" />
     <MESSAGE value="not is catch" />
-    <option name="LAST_COMMIT_MESSAGE" value="not is catch" />
+    <MESSAGE value="is catch metod" />
+    <option name="LAST_COMMIT_MESSAGE" value="is catch metod" />
   </component>
 </project>
