@@ -38,6 +38,15 @@ public class Player {
 
     public void move(int dx, Wall[] walls) {
 
+        if (!isTouchTheLeftWall(walls) && !isTouchTheRightWall(walls)){
+            this.y -= this.velocity;
+        }
+        if (!isToucheTheGround(walls)) {
+            this.velocity--;
+            isTouchTheCeiling(walls);
+        }else {
+            this.velocity = 0;
+        }
         if (isTouchTheRightWall(walls)) {
             if(dx >= 0){
                 this.x += dx;
@@ -48,16 +57,6 @@ public class Player {
             }
         }else{
             this.x += dx;
-        }
-
-        if (!isTouchTheLeftWall(walls) && !isTouchTheRightWall(walls)){
-            this.y -= this.velocity;
-        }
-        if (!isToucheTheGround(walls)) {
-            this.velocity--;
-            isTouchTheCeiling(walls);
-        }else {
-            this.velocity = 0;
         }
     }
     public void jump(Wall[] walls) {
