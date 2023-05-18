@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 
 public class EnterPanel extends JPanel implements ActionListener {
 
+    public static Frame frame;
     JButton enterButton;
 
     public EnterPanel() {
@@ -14,8 +15,8 @@ public class EnterPanel extends JPanel implements ActionListener {
         enterButton.setFocusable(false);
 
         this.setBounds(0,0,1000,600);
-//        this.setFocusable(true);
-//        this.requestFocus();
+        this.setFocusable(true);
+        this.requestFocus();
         this.add(enterButton);
 
     }
@@ -23,9 +24,11 @@ public class EnterPanel extends JPanel implements ActionListener {
 
         super.paintComponent(graphics);
 
-        graphics.setFont(new Font(null,0,50));
-        graphics.drawString("", 260, 60);
-        enterButton.setBounds(100,100, 100, 100);
+        graphics.setFont(new Font(null,5,40));
+        graphics.drawString("Welcome to catches", 280, 60);
+        graphics.drawString("In catches there are a chaser and fugitive", 100, 120);
+        graphics.drawString("In catches there are a chaser and fugitive", 100, 120);
+        enterButton.setBounds(440,400, 100, 50);
 
     }
 
@@ -35,7 +38,7 @@ public class EnterPanel extends JPanel implements ActionListener {
 
         if (e.getSource() == enterButton){
 
-            Frame frame = new Frame();
+            frame = new Frame();
             frame.showFrame();
 
             Main.enterFrame.dispose();
