@@ -17,6 +17,8 @@ public class Player {
 
         velocity = 0;
 
+        this.isCatch = isCatch;
+
         if (isCatch){
             this.color = Color.RED;
         }else this.color = Color.BLUE;
@@ -202,7 +204,7 @@ public class Player {
     public int getSpeed() {
         return speed;
     }
-    public void setSpeed(Color color) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
 }

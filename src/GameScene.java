@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 public class GameScene extends JPanel implements KeyListener {
 
+    public static EnterFrame enterFrame;
     private Player player1;
     private Player player2;
     private Wall[] walls;
@@ -15,7 +16,8 @@ public class GameScene extends JPanel implements KeyListener {
     private boolean P2Left;
     private boolean P2Right;
     private boolean P2Jump;
-    private int score;
+    private static int scoreP1;
+    private static int scoreP2;
     private int timer;
     public GameScene(){
 
@@ -23,15 +25,23 @@ public class GameScene extends JPanel implements KeyListener {
 
         walls = Wall.maps(0);
 
-        this.player1 = new Player(100, 500, false);
-        this.player2 = new Player(900, 500, true);
+        if(Main.getNumPlayed() == 0) {
+            this.player1 = new Player(100, 500, false);
+            this.player2 = new Player(900, 500, true);
+        }else {
+            this.player1 = new Player(100, 500, true);
+            this.player2 = new Player(900, 500, false);
+        }
+        Main.setNumPlayed();
+
         this.coins = new Coin[3];
         for(int i = 0 ; i < coins.length ; i++){
             coins[i] = new Coin(0,0);
         }
 
-        score = 0;
-        timer = 0;
+        scoreP1 = 0;
+        scoreP2 = 0;
+        timer = 6000;
 
         this.setFocusable(true);
         this.requestFocus();
@@ -69,16 +79,34 @@ public class GameScene extends JPanel implements KeyListener {
                     player2.move(0,walls);
                 }
 
-                if(player1.isTouchTheCoin(coins) != -1){
-                    score++;
-                    coins[player1.isTouchTheCoin(coins)].replace(player1,player2,walls,coins);
+                if(!player1.isCatch()) {
+                    if (player1.isTouchTheCoin(coins) != -1) {
+                        scoreP1++;
+                        coins[player1.isTouchTheCoin(coins)].replace(player1, player2, walls, coins);
+                    }
+                }else {
+                    if (player2.isTouchTheCoin(coins) != -1) {
+                        scoreP2++;
+                        coins[player2.isTouchTheCoin(coins)].replace(player2, player1, walls, coins);
+                    }
                 }
-                timer += 1;
+                timer --;
 
-                if(timer == 6000 || player2.isTouchTheHunted(player1)){
-                    System.out.println("The game end: \nThe hunted get " + score + " points");
+                if(timer == 0 || player2.isTouchTheHunted(player1)){
+                    if(!player1.isCatch()) {
+                        System.out.println("The game end:\nThe hunted get " + scoreP1 + " points");
+                        Main.setP1FinalScore(scoreP1);
+                    }else {
+                        System.out.println("The game end:\nThe hunted get " + scoreP2 + " points");
+                        Main.setP2FinalScore(scoreP2);
+                    }
+                    enterFrame = new EnterFrame();
+                    enterFrame.showFrame();
+                    EnterPanel.frame.dispose();
+                    break;
                 }
             }
+            System.out.println(timer);
         }).start();
     }
 
@@ -86,8 +114,12 @@ public class GameScene extends JPanel implements KeyListener {
 
         super.paintComponent(graphics);
 
-        graphics.setFont(new Font(null,0,50));
-        graphics.drawString("Time: " + timer / 100 + ":" + timer % 100 + "\t\t Score: " + score, 260, 60);
+        graphics.setFont(new Font(null, Font.PLAIN,50));
+        if(!player1.isCatch()) {
+            graphics.drawString("Time: " + timer / 100 + ":" + timer % 100 + "\t\t Score: " + scoreP1, 260, 60);
+        }else {
+            graphics.drawString("Time: " + timer / 100 + ":" + timer % 100 + "\t\t Score: " + scoreP2, 260, 60);
+        }
 
         for(Wall wall : walls){
             wall.paint(graphics);
@@ -146,5 +178,11 @@ public class GameScene extends JPanel implements KeyListener {
         if(e.getKeyCode() == KeyEvent.VK_D){
             this.P1Right = false;
         }
+    }
+    public static int getScoreP1() {
+        return scoreP1;
+    }
+    public static int getScoreP2() {
+        return scoreP2;
     }
 }
