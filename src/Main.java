@@ -1,8 +1,9 @@
 public class Main {
+    public  static EnterFrame enterFrame;
     public static void main(String[] args) {
 
-        Frame frame = new Frame();
-        frame.showFrame();
+        enterFrame = new EnterFrame();
+        enterFrame.showFrame();
 
     }
 }

@@ -151,7 +151,7 @@ public class Player {
         }
         return false;
     }
-        public int getX() {
+    public int getX() {
         return x;
     }
     public void setX(int x) {

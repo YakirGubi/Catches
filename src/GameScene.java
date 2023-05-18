@@ -42,8 +42,6 @@ public class GameScene extends JPanel implements KeyListener {
         }
 
         mainGameLoop();
-
-
     }
     public void mainGameLoop(){
         new Thread(()->{
@@ -78,7 +76,7 @@ public class GameScene extends JPanel implements KeyListener {
                 timer += 1;
 
                 if(timer == 6000 || player2.isTouchTheHunted(player1)){
-                    System.out.println("The game end:\nThe hunted get " + score + " points");
+                    System.out.println("The game end: \nThe hunted get " + score + " points");
                 }
             }
         }).start();
@@ -89,7 +87,7 @@ public class GameScene extends JPanel implements KeyListener {
         super.paintComponent(graphics);
 
         graphics.setFont(new Font(null,0,50));
-        graphics.drawString("Time: " + timer/100 + ":" + timer%100 + "\t\t Score: " + score,260,60);
+        graphics.drawString("Time: " + timer / 100 + ":" + timer % 100 + "\t\t Score: " + score, 260, 60);
 
         for(Wall wall : walls){
             wall.paint(graphics);
