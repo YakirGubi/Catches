@@ -10,7 +10,7 @@ public class EnterPanel extends JPanel implements ActionListener {
 
     public EnterPanel() {
 
-        enterButton = new JButton();
+        enterButton = new JButton("Start");
         enterButton.addActionListener(this);
         enterButton.setFocusable(false);
 
@@ -41,7 +41,7 @@ public class EnterPanel extends JPanel implements ActionListener {
             frame = new Frame();
             frame.showFrame();
 
-            Main.enterFrame.dispose();
+            Main.frame.dispose();
         }
     }
 }

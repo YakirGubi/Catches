@@ -1,18 +1,18 @@
 public class Main {
-    public  static EnterFrame enterFrame;
+    public  static Frame frame;
     private static int numScene;
     private static int numPlayed;
     private static int P1FinalScore;
     private static int P2FinalScore;
     public static void main(String[] args) {
 
-        enterFrame = new EnterFrame();
-        enterFrame.showFrame();
+        frame = new Frame();
+        frame.showFrame();
 
     }
 
     public static int getNumScene() {
-        return numScene % 3;
+        return numScene % 5;
     }
 
     public static void setNumScene() {

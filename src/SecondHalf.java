@@ -10,7 +10,7 @@ public class SecondHalf extends JPanel {
 
         timer = 5;
 
-        this.setBackground(Color.GRAY);
+        this.setBackground(new Color(170,170,170));
         this.setFocusable(true);
         this.requestFocus();
 
@@ -20,14 +20,14 @@ public class SecondHalf extends JPanel {
         new Thread(()->{
             while (true) {
                 Utils.sleep(1000);
-                repaint();
                 timer--;
                 if (timer < 0) {
                    frame = new Frame();
                    frame.showFrame();
-                   GameScene.enterFrame.dispose();
+                   GameScene.frame.dispose();
                    break;
                 }
+                repaint();
             }
         }).start();
     }

@@ -77,7 +77,7 @@ public class Player {
     public boolean isToucheTheGround(Wall[] walls) {
         for (Wall wall : walls) {
             if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
-                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() - 10){
+                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight()/2){
 
                     this.y = wall.getY() - this.height;
                     return true;

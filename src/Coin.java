@@ -17,7 +17,6 @@ public class Coin {
         do{
            this.x = random.nextInt(977);
            this.y = random.nextInt(550);
-           System.out.println(isCollision(player1,player2,walls,coins));
         }while(isCollision(player1,player2,walls,coins));
 
     }

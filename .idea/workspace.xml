@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f8a9819-fdd3-4ad4-b8ec-187d42e05ead" name="Changes" comment="Panels and fixing">
-      <change afterPath="$PROJECT_DIR$/src/Trail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Coin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Coin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EndGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EndGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnterFrame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnterPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnterPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Frame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Frame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GameScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameScene.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SecondHalf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SecondHalf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Trail.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Trail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Wall.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Wall.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

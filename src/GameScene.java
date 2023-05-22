@@ -5,11 +5,13 @@ import java.awt.event.KeyListener;
 
 public class GameScene extends JPanel implements KeyListener {
 
-    public static EnterFrame enterFrame;
+    public static Frame frame;
     private Player player1;
     private Player player2;
     private Wall[] walls;
     private Coin[] coins;
+    private Trail[] P1Trail;
+    private Trail[] P2Trail;
     private boolean P1Left;
     private boolean P1Right;
     private boolean P1Jump;
@@ -37,6 +39,14 @@ public class GameScene extends JPanel implements KeyListener {
         this.coins = new Coin[3];
         for(int i = 0 ; i < coins.length ; i++){
             coins[i] = new Coin(0,0);
+        }
+        P1Trail = new Trail[20];
+        for(int i = 0 ; i < P1Trail.length ; i++){
+            P1Trail[i] = new Trail(P1Trail.length - i);
+        }
+        P2Trail = new Trail[20];
+        for(int i = 0 ; i < P2Trail.length ; i++){
+            P2Trail[i] = new Trail(P2Trail.length - i);
         }
 
         scoreP1 = 0;
@@ -78,6 +88,8 @@ public class GameScene extends JPanel implements KeyListener {
                 }else {
                     player2.move(0,walls);
                 }
+                moveTrail(player1,P1Trail);
+                moveTrail(player2,P2Trail);
 
                 if(!player1.isCatch()) {
                     if (player1.isTouchTheCoin(coins) != -1) {
@@ -94,19 +106,16 @@ public class GameScene extends JPanel implements KeyListener {
 
                 if(timer == 0 || player2.isTouchTheHunted(player1)){
                     if(!player1.isCatch()) {
-                        System.out.println("The game end:\nThe hunted get " + scoreP1 + " points");
                         Main.setP1FinalScore(scoreP1);
                     }else {
-                        System.out.println("The game end:\nThe hunted get " + scoreP2 + " points");
                         Main.setP2FinalScore(scoreP2);
                     }
-                    enterFrame = new EnterFrame();
-                    enterFrame.showFrame();
+                    frame = new Frame();
+                    frame.showFrame();
                     EnterPanel.frame.dispose();
                     break;
                 }
             }
-            System.out.println(timer);
         }).start();
     }
 
@@ -123,6 +132,12 @@ public class GameScene extends JPanel implements KeyListener {
 
         for(Wall wall : walls){
             wall.paint(graphics);
+        }
+        for(Trail trail : P1Trail){
+            trail.paint(graphics);
+        }
+        for(Trail trail : P2Trail){
+            trail.paint(graphics);
         }
         this.player1.paint(graphics);
         this.player2.paint(graphics);
@@ -184,5 +199,13 @@ public class GameScene extends JPanel implements KeyListener {
     }
     public static int getScoreP2() {
         return scoreP2;
+    }
+    public void moveTrail(Player player , Trail[] trails){
+        for(int i = trails.length - 1 ; i > 0 ; i--){
+            trails[i].setX(trails[i-1].getX());
+            trails[i].setY(trails[i-1].getY());
+        }
+        trails[0].setX(player.getX() + player.getWidth()/2 - trails[0].getSize()/2);
+        trails[0].setY(player.getY() + player.getHeight()/2 - trails[0].getSize()/2);
     }
 }
