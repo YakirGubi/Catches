@@ -1,4 +1,7 @@
+import javax.sound.sampled.*;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class Coin {
@@ -6,10 +9,34 @@ public class Coin {
     private int y;
     private int size = 15;
     private Color color = Color.YELLOW;
+    File coinSound;
+    AudioInputStream coinAudioSystem;
+    Clip clip;
 
     public Coin(int x , int y){
         this.x = x;
         this.y = y;
+
+        coinSound = new File("coinSound.wav");
+        try {
+            coinAudioSystem = AudioSystem.getAudioInputStream(coinSound);
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            clip = AudioSystem.getClip();
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            clip.open(coinAudioSystem);
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void replace(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
         Random random = new Random();
@@ -18,6 +45,9 @@ public class Coin {
            this.x = random.nextInt(977);
            this.y = random.nextInt(550);
         }while(isCollision(player1,player2,walls,coins));
+
+        clip.setMicrosecondPosition(0);
+        clip.start();
 
     }
     public boolean isCollision(Player player1 , Player player2 , Wall[] walls , Coin[] coins){

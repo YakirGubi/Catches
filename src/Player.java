@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import javax.sound.sampled.*;
 
 public class Player {
 
@@ -28,7 +32,6 @@ public class Player {
 
         this.width = 20;
         this.height = 30;
-
     }
 
     public void paint(Graphics graphics) {

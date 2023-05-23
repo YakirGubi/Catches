@@ -2,13 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
 public class EnterPanel extends JPanel implements ActionListener {
 
     public static Frame frame;
     JButton enterButton;
+    ImageIcon image;
 
     public EnterPanel() {
+
+        image = new ImageIcon("Untitled.png");
 
         enterButton = new JButton("Start");
         enterButton.addActionListener(this);
@@ -24,14 +28,13 @@ public class EnterPanel extends JPanel implements ActionListener {
 
         super.paintComponent(graphics);
 
-        graphics.setFont(new Font(null,5,40));
-        graphics.drawString("Welcome to catches", 280, 60);
-        graphics.drawString("In catches there are a chaser and fugitive", 100, 120);
-        graphics.drawString("In catches there are a chaser and fugitive", 100, 120);
-        enterButton.setBounds(440,400, 100, 50);
+        this.image.paintIcon(this, graphics, 0, 0);
+
+        graphics.setFont(new Font(null,5,18));
+
+        enterButton.setBounds(440,440, 100, 50);
 
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
