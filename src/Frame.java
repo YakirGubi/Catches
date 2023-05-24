@@ -1,14 +1,13 @@
 import javax.swing.*;
-import java.util.Scanner;
 
 public class Frame extends JFrame{
 
-    public static final int Width = 1000;
-    public static final int Height = 600;
-    GameScene gameScene;
-    public static EnterPanel enterPanel;
-    public static SecondHalf secondHalf;
-    public static EndGame endGame;
+    private final int Width = 1000;
+    private final int Height = 600;
+    private EnterPanel enterPanel;
+    private GameScene gameScene;
+    private SecondHalf secondHalf;
+    private EndGame endGame;
     public Frame(){
 
         this.setTitle("Catches");
@@ -16,25 +15,34 @@ public class Frame extends JFrame{
         this.setSize(Width,Height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+
         if(Main.getNumScene() == 0) {
-            enterPanel = new EnterPanel();
-            this.add(enterPanel);
+
+            this.enterPanel = new EnterPanel();
+            this.add(this.enterPanel);
             Main.setNumScene();
+
         }else if(Main.getNumScene() == 1) {
-            gameScene = new GameScene();
-            this.add(gameScene);
+
+            this.gameScene = new GameScene();
+            this.add(this.gameScene);
             Main.setNumScene();
+
         }else if(Main.getNumScene() == 2){
-            secondHalf = new SecondHalf();
-            this.add(secondHalf);
+
+            this.secondHalf = new SecondHalf();
+            this.add(this.secondHalf);
             Main.setNumScene();
+
         }else if(Main.getNumScene() == 3) {
-            gameScene = new GameScene();
-            this.add(gameScene);
+
+            this.gameScene = new GameScene();
+            this.add(this.gameScene);
             Main.setNumScene();
+
         }else {
-            endGame = new EndGame();
-            this.add(endGame);
+            this.endGame = new EndGame();
+            this.add(this.endGame);
             Main.setNumScene();
         }
     }

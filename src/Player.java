@@ -1,8 +1,4 @@
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import javax.sound.sampled.*;
 
 public class Player {
 
@@ -54,7 +50,6 @@ public class Player {
         }else{
             this.x += dx;
         }
-
         if (!isTouchTheLeftWall(walls) && !isTouchTheRightWall(walls)){
             this.y -= this.velocity;
         }
@@ -66,6 +61,7 @@ public class Player {
         }
     }
     public void jump(Wall[] walls) {
+
         if(isToucheTheGround(walls)) {
             this.velocity = 15;
         }else if(isTouchTheLeftWall(walls)) {
@@ -78,10 +74,10 @@ public class Player {
     }
 
     public boolean isToucheTheGround(Wall[] walls) {
+
         for (Wall wall : walls) {
             if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
-                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight()/2){
-
+                if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() / 2){
                     this.y = wall.getY() - this.height;
                     return true;
 
@@ -119,6 +115,7 @@ public class Player {
         }
         return false;
     }
+
     private boolean isTouchTheRightWall(Wall[] walls){
 
         for (Wall wall : walls) {
@@ -134,7 +131,10 @@ public class Player {
         }
         return false;
     }
+
+
     public int isTouchTheCoin(Coin[] coins) {
+
         if (!this.isCatch){
             for (int i = 0; i < coins.length; i++) {
                 if (this.x + this.width >= coins[i].getX() && this.x < coins[i].getX() + coins[i].getSize()){

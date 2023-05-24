@@ -6,17 +6,17 @@ import java.awt.image.BufferedImage;
 
 public class EnterPanel extends JPanel implements ActionListener {
 
-    public static Frame frame;
-    JButton enterButton;
-    ImageIcon image;
+    private static Frame frame;
+    private JButton enterButton;
+    private ImageIcon image;
 
     public EnterPanel() {
 
-        image = new ImageIcon("Untitled.png");
+        this.image = new ImageIcon("openW.png");
 
-        enterButton = new JButton("Start");
-        enterButton.addActionListener(this);
-        enterButton.setFocusable(false);
+        this.enterButton = new JButton("Start");
+        this.enterButton.addActionListener(this);
+        this.enterButton.setFocusable(false);
 
         this.setBounds(0,0,1000,600);
         this.setFocusable(true);
@@ -28,11 +28,11 @@ public class EnterPanel extends JPanel implements ActionListener {
 
         super.paintComponent(graphics);
 
-        this.image.paintIcon(this, graphics, 0, 0);
+        this.image.paintIcon(this, graphics, 0, -10);
 
         graphics.setFont(new Font(null,5,18));
 
-        enterButton.setBounds(440,440, 100, 50);
+        this.enterButton.setBounds(440,460, 100, 50);
 
     }
 
@@ -44,7 +44,15 @@ public class EnterPanel extends JPanel implements ActionListener {
             frame = new Frame();
             frame.showFrame();
 
-            Main.frame.dispose();
+            Main.getFrame().dispose();
         }
+    }
+
+    public static Frame getFrame() {
+        return frame;
+    }
+
+    public static void setFrame(Frame frame) {
+        EnterPanel.frame = frame;
     }
 }

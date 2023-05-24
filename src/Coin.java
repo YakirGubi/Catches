@@ -14,6 +14,8 @@ public class Coin {
     Clip clip;
 
     public Coin(int x , int y){
+
+
         this.x = x;
         this.y = y;
 
@@ -39,18 +41,20 @@ public class Coin {
         }
     }
     public void replace(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
+
         Random random = new Random();
 
         do{
            this.x = random.nextInt(977);
            this.y = random.nextInt(550);
+
         }while(isCollision(player1,player2,walls,coins));
 
         clip.setMicrosecondPosition(0);
         clip.start();
-
     }
     public boolean isCollision(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
+
         if (this.x + this.size >= player1.getX() && this.x <= player1.getX() + player1.getWidth()) {
             if (this.y + this.size >= player1.getY() && this.y <= player1.getY() + player1.getHeight()) {
 

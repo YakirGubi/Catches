@@ -24,7 +24,7 @@ public class SecondHalf extends JPanel {
                 if (timer < 0) {
                    frame = new Frame();
                    frame.showFrame();
-                   GameScene.frame.dispose();
+                   GameScene.getFrame().dispose();
                    break;
                 }
                 repaint();
@@ -36,9 +36,15 @@ public class SecondHalf extends JPanel {
         super.paintComponent(graphics);
 
         graphics.setFont(new Font(null, Font.PLAIN,50));
-        graphics.drawString("Player1 final score is : " + GameScene.getScoreP1(),200,160);
+        graphics.drawString("Player1 final score is : " + GameScene.getScore(),200,160);
         graphics.drawString("Next round start in " + timer + " seconds",160,360);
+    }
 
+    public static Frame getFrame() {
+        return frame;
+    }
 
+    public static void setFrame(Frame frame) {
+        SecondHalf.frame = frame;
     }
 }

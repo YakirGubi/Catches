@@ -5,12 +5,13 @@ import java.awt.event.ActionListener;
 
 public class EndGame extends JPanel implements ActionListener {
 
-    JButton button;
-    Frame frame;
+    private JButton button;
+    private Frame frame;
     public EndGame(){
-        button = new JButton("Play Again");
-        button.addActionListener(this);
-        button.setFocusable(false);
+
+        this.button = new JButton("Play Again");
+        this.button.addActionListener(this);
+        this.button.setFocusable(false);
 
         this.setBackground(new Color(170,170,170));
         this.setFocusable(true);
@@ -24,24 +25,26 @@ public class EndGame extends JPanel implements ActionListener {
         graphics.setFont(new Font(null, Font.PLAIN,50));
 
         graphics.drawString("Player2 final score is : " + Main.getP2FinalScore() , 260, 160);
+
         if(Main.getP1FinalScore() > Main.getP2FinalScore()) {
             graphics.drawString("The Winner Is Player1",260,360);
         }else if(Main.getP1FinalScore() == Main.getP2FinalScore()){
-            graphics.drawString("It Is Draw",260,360);
+            graphics.drawString("It Is Draw",390,360);
         }else {
             graphics.drawString("The Winner Is Player2",260,360);
         }
-        button.setBounds(440,400, 100, 50);
+        this.button.setBounds(440,400, 100, 50);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == button){
 
-            frame = new Frame();
-            frame.showFrame();
+        if (e.getSource() == this.button){
 
-            Main.frame.dispose();
+            this.frame = new Frame();
+            this.frame.showFrame();
+
+            GameScene.getFrame().dispose();
         }
     }
 }

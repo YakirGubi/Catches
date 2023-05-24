@@ -1,5 +1,5 @@
 public class Main {
-    public  static Frame frame;
+    private static Frame frame;
     private static int numScene;
     private static int numPlayed;
     private static int P1FinalScore;
@@ -9,6 +9,10 @@ public class Main {
         frame = new Frame();
         frame.showFrame();
 
+    }
+
+    public static Frame getFrame() {
+        return frame;
     }
 
     public static int getNumScene() {
@@ -41,4 +45,5 @@ public class Main {
     public static void setP2FinalScore(int p2FinalScore) {
         P2FinalScore = p2FinalScore;
     }
+
 }
