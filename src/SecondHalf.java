@@ -17,10 +17,12 @@ public class SecondHalf extends JPanel {
         mainLoop();
     }
     public void mainLoop(){
+        //making timer for the next game.
         new Thread(()->{
             while (true) {
                 Utils.sleep(1000);
                 timer--;
+                //if the timer go to 0 it closes the frame and open the next panel.
                 if (timer < 0) {
                    frame = new Frame();
                    frame.showFrame();

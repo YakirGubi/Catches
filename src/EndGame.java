@@ -23,9 +23,8 @@ public class EndGame extends JPanel implements ActionListener {
         super.paintComponent(graphics);
 
         graphics.setFont(new Font(null, Font.PLAIN,50));
-
         graphics.drawString("Player2 final score is : " + Main.getP2FinalScore() , 260, 160);
-
+        //printing how is the winner.
         if(Main.getP1FinalScore() > Main.getP2FinalScore()) {
             graphics.drawString("The Winner Is Player1",260,360);
         }else if(Main.getP1FinalScore() == Main.getP2FinalScore()){
@@ -38,7 +37,7 @@ public class EndGame extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //the restart button opening the frame again now with the EnterPanel.
         if (e.getSource() == this.button){
 
             this.frame = new Frame();

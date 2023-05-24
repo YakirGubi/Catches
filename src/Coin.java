@@ -15,7 +15,6 @@ public class Coin {
 
     public Coin(int x , int y){
 
-
         this.x = x;
         this.y = y;
 
@@ -44,17 +43,18 @@ public class Coin {
 
         Random random = new Random();
 
+        //finding new place to the coin that not collision with any other object.
         do{
            this.x = random.nextInt(977);
            this.y = random.nextInt(550);
-
         }while(isCollision(player1,player2,walls,coins));
 
+        //making sound when coin get replace.
         clip.setMicrosecondPosition(0);
         clip.start();
     }
     public boolean isCollision(Player player1 , Player player2 , Wall[] walls , Coin[] coins){
-
+        //checking if the coin is collision with any object.
         if (this.x + this.size >= player1.getX() && this.x <= player1.getX() + player1.getWidth()) {
             if (this.y + this.size >= player1.getY() && this.y <= player1.getY() + player1.getHeight()) {
 
@@ -75,6 +75,7 @@ public class Coin {
                 }
             }
         }
+        //checking if the coin collision with other coin except himself.
         int count = 0;
         for (int i = 0 ; i < coins.length ; i++) {
             if (this.x + this.size >= coins[i].getX() && this.x <= coins[i].getX() + coins[i].getSize()) {
@@ -112,5 +113,4 @@ public class Coin {
     public Color getColor() {
         return color;
     }
-
 }

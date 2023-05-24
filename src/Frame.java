@@ -15,7 +15,7 @@ public class Frame extends JFrame{
         this.setSize(Width,Height);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-
+        //checking what panel need to be open, by checking the % of the NumScene in Main.
         if(Main.getNumScene() == 0) {
 
             this.enterPanel = new EnterPanel();

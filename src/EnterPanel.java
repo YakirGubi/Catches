@@ -38,7 +38,7 @@ public class EnterPanel extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //the enterButton opening the frame again now with the GameScene
         if (e.getSource() == enterButton){
 
             frame = new Frame();

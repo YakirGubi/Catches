@@ -18,7 +18,7 @@ public class Player {
         velocity = 0;
 
         this.isCatch = isCatch;
-
+        //making the escaper blue and the catcher red.
         if (isCatch){
             this.color = Color.RED;
         }else this.color = Color.BLUE;
@@ -39,6 +39,7 @@ public class Player {
 
     public void move(int dx, Wall[] walls) {
 
+        //the player move on the x-axis and not go through walls.
         if (isTouchTheRightWall(walls)) {
             if(dx >= 0){
                 this.x += dx;
@@ -50,6 +51,7 @@ public class Player {
         }else{
             this.x += dx;
         }
+        //the player move on the y-axis and not go through walls.
         if (!isTouchTheLeftWall(walls) && !isTouchTheRightWall(walls)){
             this.y -= this.velocity;
         }
@@ -61,7 +63,7 @@ public class Player {
         }
     }
     public void jump(Wall[] walls) {
-
+        //making the player jump only if he is on the ground or walls.
         if(isToucheTheGround(walls)) {
             this.velocity = 15;
         }else if(isTouchTheLeftWall(walls)) {
@@ -74,13 +76,12 @@ public class Player {
     }
 
     public boolean isToucheTheGround(Wall[] walls) {
-
+        //checking that the player on the ground.
         for (Wall wall : walls) {
             if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
                 if (this.y + this.height >= wall.getY() && this.y < wall.getY() + wall.getHeight() / 2){
                     this.y = wall.getY() - this.height;
                     return true;
-
                 }
             }
         }
@@ -88,7 +89,7 @@ public class Player {
     }
 
     public void isTouchTheCeiling(Wall[] walls){
-
+        //checking that the player touching the ceiling.
         for (Wall wall : walls) {
             if(this.x + this.width >= wall.getX() + this.speed && this.x < wall.getX() + wall.getWidth() - this.speed){
                 if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()){
@@ -102,7 +103,7 @@ public class Player {
     }
 
     private boolean isTouchTheLeftWall(Wall[] walls) {
-
+        //checking that the player touching the left side of the wall.
         for (Wall wall : walls) {
             if (this.x + this.width >= wall.getX() && this.x + this.width <= wall.getX() + this.speed) {
                 if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()) {
@@ -117,9 +118,8 @@ public class Player {
     }
 
     private boolean isTouchTheRightWall(Wall[] walls){
-
+        //checking that the player touching the right side of the wall.
         for (Wall wall : walls) {
-
             if (this.x <= wall.getX() + wall.getWidth() && this.x >= wall.getX() + wall.getWidth() - this.speed){
                 if (this.y >= wall.getY() && this.y <= wall.getY() + wall.getHeight()){
 
@@ -134,7 +134,7 @@ public class Player {
 
 
     public int isTouchTheCoin(Coin[] coins) {
-
+        //checking if the escape one touch a coin and what the number of the coin.
         if (!this.isCatch){
             for (int i = 0; i < coins.length; i++) {
                 if (this.x + this.width >= coins[i].getX() && this.x < coins[i].getX() + coins[i].getSize()){
@@ -148,7 +148,7 @@ public class Player {
     }
 
     public boolean isTouchTheHunted(Player player) {
-
+        //checking if the players touch each other.
         if (this.x + this.width >= player.getX() && this.x <= player.getX() + player.getWidth()) {
             if (this.y + this.height >= player.getY() && this.y <= player.getY() + player.getHeight()) {
                 return true;

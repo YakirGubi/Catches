@@ -22,7 +22,7 @@ public class Wall {
     }
     public static Wall[] maps(int num){
         Wall[] map;
-
+        //making the map by the number that the function get.
         if(num == 0){
             map = new Wall[18];
             map[4] = new Wall(100, 150, 100, 20);

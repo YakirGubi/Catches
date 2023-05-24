@@ -23,9 +23,9 @@ public class GameScene extends JPanel implements KeyListener {
     public GameScene(){
 
         this.setBackground(Color.GRAY);
-
+        //choosing the map from the maps that made in Wall.maps(now there are only one map).
         this.walls = Wall.maps(0);
-
+        //choosing how is the player that need to be the catch and who is the escaper, by the NumPlayed in Main.
         if(Main.getNumPlayed() == 0) {
             this.player1 = new Player(100, 500, false);
             this.player2 = new Player(900, 500, true);
@@ -49,15 +49,14 @@ public class GameScene extends JPanel implements KeyListener {
         }
 
         this.score = 0;
-        this.score = 0;
         this.timer = 6000;
 
         this.setFocusable(true);
         this.requestFocus();
         this.addKeyListener(this);
-
+        //replacing the coins for new location instead (0,0).
         for (Coin coin : coins){
-            coin.replace(player1, this.player2, this.walls, this.coins);
+            coin.replace(this.player1, this.player2, this.walls, this.coins);
         }
 
         mainGameLoop();
@@ -89,7 +88,7 @@ public class GameScene extends JPanel implements KeyListener {
                 }
                 moveTrail(this.player1,this.P1Trail);
                 moveTrail(this.player2,this.P2Trail);
-
+                //checking if the escape one touch a coin.
                 if(!this.player1.isCatch()) {
                     if (this.player1.isTouchTheCoin(this.coins) != -1) {
                         this.score++;
@@ -102,14 +101,15 @@ public class GameScene extends JPanel implements KeyListener {
                     }
                 }
                 this.timer --;
-
+                //checking if the game need to end by the timer or by the catcher.
                 if(this.timer == 0 || this.player2.isTouchTheHunted(this.player1)){
+                    //if the game end it updates the escaper FinalScore(in Main).
                     if(!this.player1.isCatch()) {
                         Main.setP1FinalScore(this.score);
                     }else {
                         Main.setP2FinalScore(this.score);
                     }
-
+                    //the frame close and opening the next panel.
                     this.frame = new Frame();
                     this.frame.showFrame();
                     if (Main.getNumPlayed() == 1){
@@ -201,6 +201,7 @@ public class GameScene extends JPanel implements KeyListener {
         return score;
     }
     public void moveTrail(Player player , Trail[] trails){
+        //making the Trail go after the player in order from big to smale.
         for(int i = trails.length - 1 ; i > 0 ; i--){
             trails[i].setX(trails[i-1].getX());
             trails[i].setY(trails[i-1].getY());
