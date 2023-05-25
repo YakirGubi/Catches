@@ -63,15 +63,15 @@ public class Player {
         }
     }
     public void jump(Wall[] walls) {
-        //making the player jump only if he is on the ground or walls.
-        if(isToucheTheGround(walls)) {
-            this.velocity = 15;
-        }else if(isTouchTheLeftWall(walls)) {
+        //making the player jump only if he is on the ground or the walls.
+        if(isTouchTheLeftWall(walls)) {
             this.velocity = 15;
             this.x -= this.speed;
         }else if(isTouchTheRightWall(walls)){
             this.velocity = 15;
             this.x += this.speed;
+        }else if(isToucheTheGround(walls)) {
+            this.velocity = 15;
         }
     }
 
